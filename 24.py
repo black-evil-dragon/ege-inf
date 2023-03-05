@@ -1,3 +1,93 @@
+from config import name
+
+
+# 24 № 5810 (Уровень: Сложный)
+# Текстовый файл содержит строку из заглавных латинских букв X, Y и Z, всего не более чем из 10^6 символов.
+# Определите максимальную длину подпоследовательности, состоящей из сочетаний XY, YZ и XYZ.
+# Искомая подпоследовательность должна состоять только из пар XY, или только из пар YZ,
+# или только из троек XYZ,
+# или только из пар XY, YZ и троек XYZ в произвольном порядке следования этих сочетаний.
+
+"""
+f = open('C:/Users/'+ name + '/Downloads/24_5810.txt').read().strip()
+
+k = km = 0
+while 'XYZ' in f:
+    f = f.replace('XYZ', '3')
+
+while 'XY' in f:
+    f = f.replace('XY', '2')
+
+while 'YZ' in f:
+    f = f.replace('YZ', '2')
+
+f = f.replace('X', ' ').replace('Y', ' ').replace('Z', ' ').split()
+
+for i in range(len(f)):
+    m = f[i]
+    k = 0
+    for j in range(len(m)):
+        if m[j] == '2':
+            k += 2
+            km = max(km, k)
+        elif m[j] == '3':
+            k += 3
+            km = max(km, k)
+        else:
+            k = 0
+
+print(km)
+"""
+
+
+
+# 24 № 5888 Danov2301 (Уровень: Сложный)
+
+# (А.Богданов) Строка содержит символы латинского алфавита.
+# Определите максимальную длину подстроки не содержащей подстрок,
+# отличающейся от «DANOV» лишь на одну букву.
+
+"""
+f = open('C:/Users/'+ name + '/Downloads/24_5888.txt').read().strip()
+
+k = km = 0
+
+for i in range(len(f) - 4):
+    if sum( x == y for x, y in zip('DANOV', f[i:i+5])) == 4:
+        k = 0
+    else:
+        k += 1
+        km = max(k, km)
+
+print(km + 4)
+"""
+
+
+# 24 № 5955 (Уровень: Средний)
+# Текстовый файл состоит из символов A, C, D, F и O.
+# Определите максимальное количество идущих подряд символов, среди которых нет подстроки вида
+# согласная + гласная + гласная + согласная
+# в прилагаемом файле.
+# Для выполнения этого задания следует написать программу.
+
+"""
+f = open('C:/Users/'+ name + '/Downloads/24_5955.txt').read().strip()
+
+f = f.replace('A', '0').replace('C', '1').replace('D', '1').replace('F', '1').replace('O', '0')
+
+while '1001' in f:
+    f = f.replace('1001', '100 001')
+
+f = f.split()
+k = 0
+
+for i in range(len(f)):
+    k = max(k, len(f[i]))
+print(k)
+"""
+
+
+
 # 24 № 6029 ФИПИ 03.02.23 (Уровень: Базовый)
 # Текстовый файл состоит из символов E, D и F.
 # Определите максимальную длину непрерывной последовательности символов,
@@ -6,29 +96,23 @@
 # Для выполнения этого задания следует написать программу.
 
 
-# Не решено
-f = open('C:/Users//Downloads/24_6029.txt').read().strip()
-l = list(f)
+# хз как это работает пздц
+"""
+f = open('C:/Users/'+ name + '/Downloads/24_6029.txt').read().strip().split('D')
 
-for i in range(len(l)):
-    if l[i] in 'EF' : l[i] = '1'
-    else: l[i] = '0'
-
-l = ''.join(l)
-l = l.replace('11', 'x')
-l = l.replace('1', ' ').replace('0', ' ')
-j = l.split(' ')
-
-k = 0
 kmax = 0
 
-for i in range(len(j)):
-    if j[i].count('x') > 5: print(j[i].count('x'))
+for j in f:
+    k = 1
 
+    for i in range(0, len(j) - 1, 2):
+        if j[i] + j[i + 1] == 'FE':
+            k += 2
+            kmax = max(k, kmax)
+        else:
+            k = 1
 print(kmax)
-
-
-
+"""
 
 
 
@@ -62,11 +146,6 @@ for i in l:
         k = 0
 print(mx * 3)
 """
-
-
-
-
-
 
 
 
